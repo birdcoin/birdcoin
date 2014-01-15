@@ -830,11 +830,16 @@ int64 static GetBlockValue(int nHeight, int64 nFees)
 {
     int64 nSubsidy = 1 * COIN;
 
+    if(nHeight < 5121) // 10 coin block reward within the first 3.5 days
+        nSubsidy = 10 * COIN;
+    if(nHeight > 1051200) // no block reward after 2 years
+        nSubsidy = 0;
+
     return nSubsidy + nFees;
 }
 
-static const int64 nTargetTimespan = 1 * 24 * 60 * 60; // birdcoin: 1 days
-static const int64 nTargetSpacing = 120; // birdcoin: 2 minute blocks
+static const int64 nTargetTimespan = 2 * 60; // birdcoin: 1 days
+static const int64 nTargetSpacing = 60; // birdcoin: 2 minute blocks
 static const int64 nInterval = nTargetTimespan / nTargetSpacing;
 
 // Thanks: Balthazar for suggesting the following fix
@@ -2002,7 +2007,7 @@ bool LoadBlockIndex(bool fAllowNew)
     
         
         // Genesis block
-        const char* pszTimestamp = "Building a coin to show the world how...";
+        const char* pszTimestamp = "Chris Dixon believes BTC worth $100,000 | www.wired.com/wiredenterprise/2014/01/chrisdixon/";
         CTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
@@ -2014,13 +2019,13 @@ bool LoadBlockIndex(bool fAllowNew)
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1369623856; //epochtime
+        block.nTime    = 1389818022; //epochtime
         block.nBits    = 0x1e0ffff0;
         block.nNonce   = 1345972;
 
         if (fTestNet)
         {
-            block.nTime    = 1369591342;
+            block.nTime    = 1389818022;
             block.nNonce   = 440824;
         }
 
