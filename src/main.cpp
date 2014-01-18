@@ -29,7 +29,7 @@ CTxMemPool mempool;
 unsigned int nTransactionsUpdated = 0;
 
 map<uint256, CBlockIndex*> mapBlockIndex;
-uint256 hashGenesisBlock("0xbf9385c680c3a7aec778b6dcf87dbfb105369d55143fc99ebe86f469cd53ddca");
+uint256 hashGenesisBlock("0x653a8f2f21836ad5fcb5b92e25f74f477afc3a49aabcd82a3ff7c9a71348230b");
 static CBigNum bnProofOfWorkLimit(~uint256(0) >> 20); // starting difficulty is 1 / 2^12
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
@@ -2007,7 +2007,7 @@ bool LoadBlockIndex(bool fAllowNew)
     
         
         // Genesis block
-        const char* pszTimestamp = "Chris Dixon believes BTC worth $100,000 | www.wired.com/wiredenterprise/2014/01/chrisdixon/";
+        const char* pszTimestamp = "US announces seized Silk Road BTC to be sold via US Marshall auction";
         CTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
@@ -2019,9 +2019,9 @@ bool LoadBlockIndex(bool fAllowNew)
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1389818022; //epochtime
+        block.nTime    = 1390028123; //epochtime
         block.nBits    = 0x1e0ffff0;
-        block.nNonce   = 1345972;
+        block.nNonce   = 2008106;
 
         if (fTestNet)
         {
@@ -2033,10 +2033,10 @@ bool LoadBlockIndex(bool fAllowNew)
         printf("%s\n", block.GetHash().ToString().c_str());
         printf("%s\n", hashGenesisBlock.ToString().c_str());
         printf("%s\n", block.hashMerkleRoot.ToString().c_str());
-        assert(block.hashMerkleRoot == uint256("0xa33bc027415fdd025f32bcb5d298ee25de2d8f8a2deef3eb6b400bfbc70823ad"));
+        assert(block.hashMerkleRoot == uint256("0x7b65a534739228a941004f09e1b7612b7ac333a47448c4d4f5e6ba9ec18d505d"));   // a33bc027415fdd025f32bcb5d298ee25de2d8f8a2deef3eb6b400bfbc70823ad"));
 
         // If genesis block hash does not match, then generate new genesis hash.
-        if (true && block.GetHash() != hashGenesisBlock)
+        if (false && block.GetHash() != hashGenesisBlock)
         {
             printf("Searching for genesis block...\n");
             // This will figure out a valid hash and Nonce if you're
